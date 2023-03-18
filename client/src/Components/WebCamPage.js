@@ -13,16 +13,16 @@ const FaceRecognition = () => {
   const [faceMatcher, setFaceMatcher] = useState(null);
 
   const [count, setCount] = useState(0);
-  const [flag, setFlag] = useState(false);
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if (count===5){
-      console.log("successful")
-      // navigate("/result");
+  useEffect(() => {
+    if (count === -1) {
+      navigate("/unsuccess");
+    } else if (count === 5) {
+      navigate("/success", { state: { aadhaar: location.state.aadhaar } });
     }
-  },[count])
+  }, [count]);
 
   useEffect(() => {
     const moduleLoader = async () => {
@@ -41,11 +41,6 @@ const FaceRecognition = () => {
     if (!isLoaded) return;
 
     const getUserMedia = async () => {
-        console.log(location.state.url);
-        // const image = await fetch(location.state.url);
-        // const response = await fetch(location.state.url);
-        // const image = await response.json();
-        // console.log(image);
       const image = await faceapi.fetchImage(location.state.url);
 
       const results = await faceapi
@@ -104,9 +99,15 @@ const FaceRecognition = () => {
         const results = resizedDetections.map((d) =>
           faceMatcher.findBestMatch(d.descriptor)
         );
-        console.log(results);
-        setCount((prevCount)=> prevCount+1);
-      }, 5000),
+
+        console.log(results[0]._label);
+
+        if (results[0]._label === "unknown") {
+          setCount(-1);
+        } else {
+          setCount((prevCount) => prevCount + 1);
+        }
+      }, 2000),
     ];
 
     return () => unsubscribeIntervals.forEach((e) => clearInterval(e));
@@ -118,7 +119,6 @@ const FaceRecognition = () => {
 
   return (
     <>
-      <h1>Hi</h1>
       <div className="face-container" style={{ position: "relative" }}>
         <video
           ref={videoRef}
@@ -126,7 +126,8 @@ const FaceRecognition = () => {
           autoPlay
           muted
           width={"600px"}
-          height={"432px"}></video>
+          height={"432px"}
+        ></video>
         <canvas
           ref={canvasRef}
           id="face-canvas"
@@ -135,7 +136,8 @@ const FaceRecognition = () => {
             top: "0px",
             left: "0px",
             right: "0px",
-          }}></canvas>
+          }}
+        ></canvas>
       </div>
     </>
   );

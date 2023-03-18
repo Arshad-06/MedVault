@@ -21,11 +21,11 @@ export default function AdminPage() {
       const json = await response.json();
       userImgUrl = json.imgURL;
       console.log(json);
-      navigate("/webcam", {state: {url: userImgUrl}})
+      navigate("/webcam", { state: { url: userImgUrl, aadhaar: aadhaar } });
     } catch (err) {
+      alert("Aadhar does not exist");
       console.log({ error: err.message });
     }
-    aadhaar = "";
   };
 
   return (
@@ -46,12 +46,11 @@ export default function AdminPage() {
         <button
           type="submit"
           className="btn btn-primary bg-dark"
-          onClick={handleSubmit}>
+          onClick={handleSubmit}
+        >
           Submit
         </button>
       </form>
-
-      
     </>
   );
 }
