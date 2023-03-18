@@ -2,7 +2,7 @@ import React from "react";
 
 const UnsuccessfulPage = () => {
   return (
-    <div>
+    <div className="text-light">
       <h1>No match</h1>
     </div>
   );

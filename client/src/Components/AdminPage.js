@@ -32,7 +32,7 @@ export default function AdminPage() {
     <>
       <form className="">
         <div className="form-group m-4 ">
-          <label htmlFor="exampleInputEmail1">Aadhar</label>
+          <label htmlFor="exampleInputEmail1" className="text-light">Aadhar</label>
           <input
             type="text"
             className="form-control"

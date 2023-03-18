@@ -71,10 +71,11 @@ export default function Register() {
   };
 
   return (
-    <body className="">
-      <form className="">
-        <div className="form-group m-4 ">
-          <label htmlFor="exampleInputEmail1">Name</label>
+    <>
+      <form className="login-outer">
+        <h1 className="text-light">Registration</h1>
+        <div className="form-group m-4 st1">
+          <label htmlFor="exampleInputEmail1" className="text-light">Name</label>
           <input
             type="text"
             className="form-control"
@@ -85,8 +86,8 @@ export default function Register() {
             onChange={handInp}
           />
         </div>
-        <div className="form-group m-4">
-          <label htmlFor="exampleInputEmail1">Contact</label>
+        <div className="form-group m-4 st1">
+          <label htmlFor="exampleInputEmail1" className="text-light">Contact</label>
           <input
             type="text"
             className="form-control"
@@ -97,8 +98,8 @@ export default function Register() {
             placeholder="Enter contact details"
           />
         </div>
-        <div className="form-group m-4">
-          <label htmlFor="exampleInputEmail1">Aadhaar</label>
+        <div className="form-group m-4 st1">
+          <label htmlFor="exampleInputEmail1" className="text-light">Aadhaar</label>
           <input
             type="number"
             className="form-control"
@@ -109,7 +110,7 @@ export default function Register() {
             placeholder="Enter Aadhaar"
           />
         </div>
-        <div className="form-group m-4">
+        <div className="form-group m-4 st1">
           <input
             type="file"
             name="imgURL"
@@ -138,11 +139,11 @@ export default function Register() {
           );
         })}
       </div>
-      <div className="m-4">
+      <div className="m-2">
         <a href="/admin" target="_blank" rel="noopener noreferrer">
           <button>Go to admin</button>
         </a>
       </div>
-    </body>
+    </>
   );
 }
