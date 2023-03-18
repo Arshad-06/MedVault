@@ -19,7 +19,7 @@ const FaceRecognition = () => {
   useEffect(() => {
     if (count === -1) {
       navigate("/unsuccess");
-    } else if (count === 5) {
+    } else if (count === 3) {
       navigate("/success", { state: { aadhaar: location.state.aadhaar } });
     }
   }, [count]);
@@ -41,6 +41,10 @@ const FaceRecognition = () => {
     if (!isLoaded) return;
 
     const getUserMedia = async () => {
+      videoRef.current.srcObject = await navigator.mediaDevices.getUserMedia({
+        video: true,
+      });
+      
       const image = await faceapi.fetchImage(location.state.url);
 
       const results = await faceapi
@@ -50,9 +54,6 @@ const FaceRecognition = () => {
         .withFaceDescriptors();
       const faceMatch = new faceapi.FaceMatcher(results, 0.6);
       setFaceMatcher(faceMatch);
-      videoRef.current.srcObject = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
     };
 
     getUserMedia()
@@ -139,6 +140,7 @@ const FaceRecognition = () => {
           }}
         ></canvas>
       </div>
+      <h1 className="mt-5 text-light">Step: {count}</h1>
     </>
   );
 };

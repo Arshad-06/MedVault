@@ -22,7 +22,7 @@ const SuccessfulPage = () => {
     return <h1>Loading...</h1>;
   }
   return (
-    <div>
+    <div className="text-light">
       <h3>Name: {user.name}</h3>
       <h3>Contact: {user.contact}</h3>
       <h3>You're admitted!</h3>
